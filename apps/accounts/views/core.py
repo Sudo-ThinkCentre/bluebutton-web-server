@@ -2,7 +2,7 @@ import logging
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib import messages
@@ -146,7 +146,6 @@ def account_settings(request):
             # update the user profile
             up.organization_name = data['organization_name']
             up.mfa_login_mode = data['mfa_login_mode']
-            up.mobile_phone_number = data['mobile_phone_number']
             up.create_applications = data['create_applications']
             up.authorize_applications = True
             up.save()
@@ -167,7 +166,6 @@ def account_settings(request):
             'email': request.user.email,
             'organization_name': up.organization_name,
             'mfa_login_mode': up.mfa_login_mode,
-            'mobile_phone_number': up.mobile_phone_number,
             'create_applications': up.create_applications,
             'last_name': request.user.last_name,
             'first_name': request.user.first_name,
